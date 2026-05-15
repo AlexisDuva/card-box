@@ -35,11 +35,6 @@ func WrongAnswer(b Box, idCell int, title string) Box {
 	return b
 }
 
-func IncrementAge(b Box) Box {
-	b.Age = b.Age + 1
-	return b
-}
-
 func NewBox(id string, title string, cells []map[string]Card, age int) (Box, error) {
 	if id == "" {
 		return Box{}, errors.New("newBox() : nil Id")
