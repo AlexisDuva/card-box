@@ -8,17 +8,15 @@ type Card struct {
 	Verso string
 }
 
-func NewCard(title string, recto string, verso string) (*Card, error) {
+func NewCard(title string, recto string, verso string) (Card, error) {
 	if title == "" {
-		return nil, errors.New("NewCard() : nil Title")
+		return Card{}, errors.New("NewCard() : nil Title")
 	}
 	if recto == "" {
-		return nil, errors.New("NewCard() : nil Recto")
+		return Card{}, errors.New("NewCard() : nil Recto")
 	}
 	if verso == "" {
-		return nil, errors.New("NewCard() : nil Verso")
+		return Card{}, errors.New("NewCard() : nil Verso")
 	}
-	var c Card
-	c = Card{Title: title, Recto: recto, Verso: verso}
-	return &c, nil
+	return Card{Title: title, Recto: recto, Verso: verso}, nil
 }

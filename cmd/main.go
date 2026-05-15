@@ -113,7 +113,7 @@ func main() {
 			if err != nil {
 				log.Fatalf("Option 2 : %s", err)
 			}
-			box = domain.AddCard(box, *card)
+			box = domain.AddCard(box, card)
 		case "3":
 			fmt.Print(box)
 		case "4":
