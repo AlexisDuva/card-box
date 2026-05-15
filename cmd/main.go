@@ -12,7 +12,16 @@ import (
 	"github.com/AlexisDuva/card-box/domain"
 )
 
-var DATA_PATH = filepath.Join("REMOVED", "box.txt")
+func dataPath() string {
+	if p := os.Getenv("CARDBOX_DATA"); p != "" {
+		return p
+	}
+	home, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return filepath.Join(home, "card-box", "box.txt")
+}
 
 func saveBox(box domain.Box, path string) error {
 	data, err := json.Marshal(box)
@@ -47,7 +56,8 @@ func loadData(path string) (domain.Box, error) {
 
 func main() {
 	fmt.Print("Welcome to CardBox\n")
-	box, err := loadData(DATA_PATH)
+	path := dataPath()
+	box, err := loadData(path)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -111,7 +121,7 @@ func main() {
 		}
 	}
 
-	err = saveBox(box, DATA_PATH)
+	err = saveBox(box, path)
 	if err != nil {
 		log.Fatal(err)
 	}
