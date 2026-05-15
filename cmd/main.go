@@ -77,8 +77,8 @@ func main() {
 		case "1":
 			cellsToAssess := domain.Assessment(len(box.Cells), box.Age)
 			fmt.Printf("cellsToAssess : %d\n", cellsToAssess)
-			for i := range cellsToAssess {
-				for _, card := range box.Cells[i] {
+			for _, id := range cellsToAssess {
+				for _, card := range box.Cells[id] {
 					fmt.Printf("Card : %s \n Question: %s\n", card.Title, card.Recto)
 					fmt.Println("Press Enter to see answer")
 					readLine()
@@ -89,10 +89,10 @@ func main() {
 						input = readLine()
 						switch input {
 						case "y":
-							box = domain.RightAnswer(box, i, card.Title)
+							box = domain.RightAnswer(box, id, card.Title)
 							break answerLoop
 						case "n":
-							box = domain.WrongAnswer(box, i, card.Title)
+							box = domain.WrongAnswer(box, id, card.Title)
 							break answerLoop
 						default:
 							fmt.Println("Invalid answer. Please try again.")
