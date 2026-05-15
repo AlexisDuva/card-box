@@ -54,6 +54,12 @@ func loadData(path string) (domain.Box, error) {
 	return boxRead, nil
 }
 
+func autosave(box domain.Box, path string) {
+	if err := saveBox(box, path); err != nil {
+		fmt.Printf("Save error: %s\n", err)
+	}
+}
+
 func main() {
 	fmt.Print("Welcome to CardBox\n")
 	path := dataPath()
@@ -101,6 +107,7 @@ func main() {
 				}
 			}
 			box.Age++
+			autosave(box, path)
 		case "2":
 			fmt.Println("Title:")
 			title := readLine()
@@ -114,6 +121,7 @@ func main() {
 				continue
 			}
 			box = domain.AddCard(box, card)
+			autosave(box, path)
 		case "3":
 			fmt.Print(box)
 		case "4":
