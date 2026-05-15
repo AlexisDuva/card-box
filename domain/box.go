@@ -34,6 +34,11 @@ func WrongAnswer(b Box, idCell int, title string) Box {
 	return b
 }
 
+func IncrementAge(b Box) Box {
+	b.Age = b.Age + 1
+	return b
+}
+
 func NewBox(id string, title string, cells []map[string]Card, age int) (Box, error) {
 	if id == "" {
 		return Box{}, errors.New("newBox() : nil Id")
@@ -54,6 +59,7 @@ func NewBox(id string, title string, cells []map[string]Card, age int) (Box, err
 }
 
 func PrintBox(box Box) {
+	fmt.Printf("Box : %s, Age : %d\n", box.Title, box.Age)
 	for i, cell := range box.Cells {
 		fmt.Printf("  [%d] (%d cartes)\n", i+1, len(cell))
 		if len(cell) == 0 {

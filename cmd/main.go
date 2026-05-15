@@ -90,6 +90,7 @@ func main() {
 					}
 				}
 			}
+			box = domain.IncrementAge(box)
 
 		case "2":
 			fmt.Println("Title:")
