@@ -35,7 +35,7 @@ func loadData(path string) (domain.Box, error) {
 	if len(read) > 0 {
 		err = json.Unmarshal(read, &boxRead)
 	} else {
-		cells := [][]domain.Card{{}, {}, {}, {}, {}, {}, {}}
+		cells := []map[string]domain.Card{{}, {}, {}, {}, {}, {}, {}}
 		boxRead, err = domain.NewBox("1", "b1", cells, 0)
 	}
 

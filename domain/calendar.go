@@ -6,11 +6,10 @@ import (
 
 func Assessment(nbc int, age int) []int {
 	asmt := []int{}
-	for i := 1; i <= nbc; i++ {
-		cycle := int(math.Pow(float64(i), 2))
-		mod := age % cycle
-		if mod == 1 {
-			asmt = append(asmt, i-1)
+	for i := 0; i < nbc; i++ {
+		cycle := int(math.Pow(2, float64(i)))
+		if age%cycle == 0 {
+			asmt = append(asmt, i)
 		}
 	}
 	return asmt
