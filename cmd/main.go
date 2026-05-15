@@ -115,7 +115,7 @@ func main() {
 			}
 			box = domain.AddCard(box, *card)
 		case "3":
-			domain.PrintBox(box)
+			fmt.Print(box)
 		case "4":
 			run = false
 		}

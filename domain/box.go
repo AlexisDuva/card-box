@@ -3,6 +3,7 @@ package domain
 import (
 	"errors"
 	"fmt"
+	"strings"
 )
 
 type Box struct {
@@ -58,16 +59,18 @@ func NewBox(id string, title string, cells []map[string]Card, age int) (Box, err
 	return b, nil
 }
 
-func PrintBox(box Box) {
-	fmt.Printf("Box : %s, Age : %d\n", box.Title, box.Age)
-	for i, cell := range box.Cells {
-		fmt.Printf("  [%d] (%d cartes)\n", i+1, len(cell))
+func (b Box) String() string {
+	var sb strings.Builder
+	fmt.Fprintf(&sb, "Box : %s, Age : %d\n", b.Title, b.Age)
+	for i, cell := range b.Cells {
+		fmt.Fprintf(&sb, "  [%d] (%d cartes)\n", i+1, len(cell))
 		if len(cell) == 0 {
-			fmt.Println("      —")
+			sb.WriteString("      —\n")
 		}
 		for _, card := range cell {
-			fmt.Printf("      • %s\n", card.Title)
+			fmt.Fprintf(&sb, "      • %s\n", card.Title)
 		}
-		fmt.Println()
+		sb.WriteString("\n")
 	}
+	return sb.String()
 }
