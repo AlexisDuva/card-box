@@ -110,7 +110,8 @@ func main() {
 			verso := readLine()
 			card, err := domain.NewCard(title, recto, verso)
 			if err != nil {
-				log.Fatalf("Option 2 : %s", err)
+				log.Printf("Option 2 : %s", err)
+				continue
 			}
 			box = domain.AddCard(box, card)
 		case "3":
