@@ -60,7 +60,7 @@ func main() {
 
 	run := true
 	for run {
-		fmt.Println("1. Test\n2. Add Card\n3. Print Box\n4. Quit")
+		fmt.Println("1. Test\n2. Add Card\n3. Print Box\n4. Save and Quit")
 		fmt.Println("What do you want to do ?")
 		input := readLine()
 		switch input {
