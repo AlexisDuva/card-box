@@ -23,6 +23,45 @@ func dataPath() string {
 	return filepath.Join(home, "card-box", "box.txt")
 }
 
+func loadData(path string) (domain.Box, error) {
+	dirs, err := os.ReadDir(filepath.Dir(path))
+	if os.IsNotExist(err) {
+		fmt.Printf("User data folder %s not found.\nCreating folder...\n", filepath.Dir(path))
+		if err := os.Mkdir(filepath.Dir(path), os.ModeDir); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("User data folder successfully created !")
+	} else if err != nil {
+		log.Fatal(err)
+	}
+	dataFileExists := false
+	for _, d := range dirs {
+		if d.Name() == "box.txt" && d.Type().IsRegular() {
+			dataFileExists = true
+			break
+		}
+	}
+	if !dataFileExists {
+		fmt.Printf("Box data file %s not found.\nCreating file...\n", path)
+		if _, err := os.Create(path); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println("Box data file successfully created !")
+	}
+	read, err := os.ReadFile(path)
+	var boxRead domain.Box
+	if len(read) > 0 {
+		err = json.Unmarshal(read, &boxRead)
+	} else {
+		cells := []map[string]domain.Card{{}, {}, {}, {}, {}, {}, {}}
+		boxRead, err = domain.NewBox("1", "b1", cells, 0)
+	}
+	if err != nil {
+		return domain.Box{}, fmt.Errorf("json.Unmarshal() : %s", err)
+	}
+	return boxRead, nil
+}
+
 func saveBox(box domain.Box, path string) error {
 	data, err := json.Marshal(box)
 	if err != nil {
@@ -33,25 +72,6 @@ func saveBox(box domain.Box, path string) error {
 		return fmt.Errorf("os.WriteFile() : %s", err)
 	}
 	return nil
-}
-
-func loadData(path string) (domain.Box, error) {
-	read, err := os.ReadFile(path)
-	if err != nil {
-		return domain.Box{}, fmt.Errorf("os.ReadFile() : %s", err)
-	}
-	var boxRead domain.Box
-	if len(read) > 0 {
-		err = json.Unmarshal(read, &boxRead)
-	} else {
-		cells := []map[string]domain.Card{{}, {}, {}, {}, {}, {}, {}}
-		boxRead, err = domain.NewBox("1", "b1", cells, 0)
-	}
-
-	if err != nil {
-		return domain.Box{}, fmt.Errorf("json.Unmarshal() : %s", err)
-	}
-	return boxRead, nil
 }
 
 func autosave(box domain.Box, path string) {
