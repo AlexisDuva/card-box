@@ -65,8 +65,7 @@ func main() {
 		input := readLine()
 		switch input {
 		case "1":
-			domain.CleanLastCellIfNeeded(&box)
-			cellsToAssess := domain.Assessment(len(box.Cells), box.Day)
+			cellsToAssess := domain.Assessment(len(box.Cells), box.Age)
 			fmt.Printf("cellsToAssess : %d\n", cellsToAssess)
 			for i := range cellsToAssess {
 				for _, card := range box.Cells[i] {
