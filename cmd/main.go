@@ -73,8 +73,21 @@ func main() {
 					fmt.Println("Press Enter to see answer")
 					readLine()
 					fmt.Printf("Answer: %s\n", card.Verso)
-					fmt.Println("Was your answer correct ? y/n")
-					input = readLine()
+				answerLoop:
+					for {
+						fmt.Println("Was your answer correct ? y/n")
+						input = readLine()
+						switch input {
+						case "y":
+							box = domain.RightAnswer(box, i, card.Title)
+							break answerLoop
+						case "n":
+							box = domain.WrongAnswer(box, i, card.Title)
+							break answerLoop
+						default:
+							fmt.Println("Invalid answer. Please try again.")
+						}
+					}
 				}
 			}
 
