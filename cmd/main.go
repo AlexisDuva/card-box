@@ -96,11 +96,11 @@ func main() {
 
 	run := true
 	for run {
-		fmt.Println("1. Test\n2. Add Card\n3. Print Box\n4. Save and Quit")
+		fmt.Println("(t) Test\n(a) Add Card\n(p) Print Box\n(q) Quit")
 		fmt.Println("What do you want to do ?")
 		input := readLine()
 		switch input {
-		case "1":
+		case "t":
 			cellsToAssess := domain.Assessment(len(box.Cells), box.Age)
 			fmt.Printf("cellsToAssess : %d\n", cellsToAssess)
 			for _, id := range cellsToAssess {
@@ -128,7 +128,7 @@ func main() {
 			}
 			box.Age++
 			autosave(box, path)
-		case "2":
+		case "a":
 			fmt.Println("Title:")
 			title := readLine()
 			fmt.Println("Recto:")
@@ -142,9 +142,9 @@ func main() {
 			}
 			box = domain.AddCard(box, card)
 			autosave(box, path)
-		case "3":
+		case "p":
 			fmt.Print(box)
-		case "4":
+		case "q":
 			run = false
 		}
 	}
