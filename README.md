@@ -7,12 +7,12 @@ A CLI flashcard app based on the [Leitner system](https://en.wikipedia.org/wiki/
 Cards are organized into 7 cells. Each cell has a review cycle that doubles in length:
 
 | Cell | Reviewed every |
-|------|---------------|
-| 1    | 1 day         |
-| 2    | 2 days        |
-| 3    | 4 days        |
-| ...  | ...           |
-| 7    | 64 days       |
+| ---- | -------------- |
+| 1    | 1 day          |
+| 2    | 2 days         |
+| 3    | 4 days         |
+| ...  | ...            |
+| 7    | 64 days        |
 
 - **Correct answer** → card moves to the next cell
 - **Wrong answer** → card goes back to cell 1
@@ -40,12 +40,12 @@ CARDBOX_DATA=/custom/path/box.txt go run ./...
 
 ### Menu
 
-| Key | Action       |
-|-----|--------------|
+| Key | Action                       |
+| --- | ---------------------------- |
 | `t` | Run a test session for today |
-| `a` | Add a new card |
-| `p` | Print the box |
-| `q` | Quit |
+| `a` | Add a new card               |
+| `p` | Print the box                |
+| `q` | Quit                         |
 
 ## Running tests
 
